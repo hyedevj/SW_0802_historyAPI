@@ -10,10 +10,11 @@ export default function App({ $target }) {
         if (pathname === '/') {
             // HomePage 그리기
             homePage.render()
-        } else if (pathname.indexOf('/products') > 0) {
+        } else if (pathname.indexOf('/products/') > 0) {
             // ProductPage 그리기
         } else {
             // 404 처리
+            $target.innerHTML = '<h1>404 Not Found!</h1>'
         }
     }
 
