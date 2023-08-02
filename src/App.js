@@ -1,6 +1,9 @@
 import HomePage from "./pages/HomePage.js"
+import ProductPage from "./pages/ProductPage.js"
+
 export default function App({ $target }) {
     const homePage = new HomePage({ $target })
+    const productPage = new ProductPage({ $target, initialState: {}}) 
     this.route = () => {
         // 여기에서 pathname에 따라 Page Component 처리
         const { pathname } = location
@@ -10,8 +13,17 @@ export default function App({ $target }) {
         if (pathname === '/') {
             // HomePage 그리기
             homePage.render()
-        } else if (pathname.indexOf('/products/') > 0) {
+        } else if (pathname.indexOf('/products/') > -1) {
             // ProductPage 그리기
+            // url에서 prodcutId 뽑기
+            // const productId = pathname.split('/products/')
+            // /product/1
+            const [, , productId] = pathname.split('/')
+            
+            productPage.setState({
+                productId
+            })
+            
         } else {
             // 404 처리
             $target.innerHTML = '<h1>404 Not Found!</h1>'

@@ -1,6 +1,6 @@
-import ProductOptions from "./ProductOptions.js"
-import Cart from "./Cart.js"
-import { request } from "./api.js"
+import ProductOptions from "../ProductOptions.js"
+import Cart from "../Cart.js"
+import { request } from "../api.js"
 
 /* state 구조
 *
@@ -17,8 +17,6 @@ export default function ProductPage({
     initialState
 }) {
     const $product = document.createElement('div')
-
-    $target.appendChild($product)
 
     this.state = initialState
 
@@ -77,10 +75,12 @@ export default function ProductPage({
             basePrice: product.basePrice,
             selectedOptions: selectedOptions
         })
+        this.render()
     }
 
-    this.render = () => {}
-    this.render()
+    this.render = () => {
+        $target.appendChild($product)
+    }
 
     const fetchOptionData = (productId) => {
         return request(`/products/${productId}`)
@@ -120,5 +120,4 @@ export default function ProductPage({
                 })
             })
     }   
-    fetchOptionData(this.state.productId)
 }
